@@ -76,4 +76,10 @@ public class IntervalTest {
     assertFalse(firstInterval.intersects(secondInterval));
   }
 
+  @Test void givenTwoIntervalsOpenOpenWhenValueIntersectionThenTrue(){
+    Interval firstInterval=new IntervalBuilder().open(left.getEquals()).open(right.getEquals()).build();
+    Interval secondInterval=new IntervalBuilder().open(right.getLess()).open(right.getGreater()).build();
+    assertTrue(firstInterval.intersects(secondInterval));
+  }
+
 }
