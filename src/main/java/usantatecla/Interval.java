@@ -11,18 +11,26 @@ public class Interval {
 		this.max = max;
 	}
 
+	private double getMinValue() {
+		return min.getValue();
+	}
+
+	private double getMaxValue() {
+		return max.getValue();
+	}
+
 	public boolean include(double value) {
 		return this.min.isWithin(value) && this.max.isWithin(value);
 	}
 
 	public boolean intersects(Interval interval) {
-		if (Math.max(this.min.value, interval.min.value) < Math.min(this.max.value, interval.max.value))
+		if (Math.max(this.getMinValue(), interval.getMinValue()) < Math.min(this.getMaxValue(), interval.getMaxValue()))
 			return true;
 		return false;
 	}
 
 	public boolean intersectsClosed(Interval interval) {
-		if (Math.max(this.min.value, interval.min.value) <= Math.min(this.max.value, interval.max.value))
+		if (Math.max(this.getMinValue(), interval.getMinValue()) <= Math.min(this.getMaxValue(), interval.getMaxValue()))
 			return true;
 		return false;
 	}
