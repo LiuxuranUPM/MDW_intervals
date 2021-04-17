@@ -13,7 +13,7 @@ public class IntervalTest {
   private IntervalBuilder intervalBuilder;
 
   @BeforeEach
-  public void before(){
+  public void before() {
     this.left = new Point(-2.2);
     this.right = new Point(4.4);
     this.intervalBuilder = new IntervalBuilder();
@@ -67,36 +67,36 @@ public class IntervalTest {
   }
 
   @Test
-  public void givenTwoIntervalsOpenOpenWhenValueIntersectionThenFalse(){
-    Interval firstInterval=new IntervalBuilder().open(left.getLess()).open(left.getGreater()).build();
-    Interval secondInterval=new IntervalBuilder().open(right.getLess()).open(right.getGreater()).build();
+  public void givenTwoIntervalsOpenOpenWhenValueIntersectionThenFalse() {
+    Interval firstInterval = new IntervalBuilder().open(left.getLess()).open(left.getGreater()).build();
+    Interval secondInterval = new IntervalBuilder().open(right.getLess()).open(right.getGreater()).build();
     assertFalse(firstInterval.intersects(secondInterval));
-    firstInterval=new IntervalBuilder().open(left.getLess()).open(left.getGreater()).build();
-    secondInterval=new IntervalBuilder().open(left.getGreater()).open(right.getGreater()).build();
-    assertFalse(firstInterval.intersects(secondInterval));
-  }
-
-  @Test
-  public void givenTwoIntervalsOpenOpenWhenValueIntersectionThenTrue(){
-    Interval firstInterval=new IntervalBuilder().open(left.getEquals()).open(right.getEquals()).build();
-    Interval secondInterval=new IntervalBuilder().open(right.getLess()).open(right.getGreater()).build();
-    assertTrue(firstInterval.intersects(secondInterval));
-    firstInterval=new IntervalBuilder().open(left.getLess()).open(left.getGreater()).build();
-    secondInterval=new IntervalBuilder().open(left.getEquals()).open(right.getEquals()).build();
-    assertTrue(firstInterval.intersects(secondInterval));
-  }
-
-  @Test
-  public void givenTwoIntervalsCloseCloseWhenValueIntersectionThenFalse(){
-    Interval firstInterval=new IntervalBuilder().closed(left.getLess()).closed(left.getGreater()).build();
-    Interval secondInterval=new IntervalBuilder().closed(right.getLess()).closed(right.getGreater()).build();
+    firstInterval = new IntervalBuilder().open(left.getLess()).open(left.getGreater()).build();
+    secondInterval = new IntervalBuilder().open(left.getGreater()).open(right.getGreater()).build();
     assertFalse(firstInterval.intersects(secondInterval));
   }
 
   @Test
-  public void givenTwoIntervalsCloseCloseWhenValueIntersectionThenTrue(){
-    Interval firstInterval=new IntervalBuilder().closed(left.getLess()).closed(left.getGreater()).build();
-    Interval secondInterval=new IntervalBuilder().closed(left.getGreater()).closed(right.getGreater()).build();
+  public void givenTwoIntervalsOpenOpenWhenValueIntersectionThenTrue() {
+    Interval firstInterval = new IntervalBuilder().open(left.getEquals()).open(right.getEquals()).build();
+    Interval secondInterval = new IntervalBuilder().open(right.getLess()).open(right.getGreater()).build();
     assertTrue(firstInterval.intersects(secondInterval));
+    firstInterval = new IntervalBuilder().open(left.getLess()).open(left.getGreater()).build();
+    secondInterval = new IntervalBuilder().open(left.getEquals()).open(right.getEquals()).build();
+    assertTrue(firstInterval.intersects(secondInterval));
+  }
+
+  @Test
+  public void givenTwoIntervalsCloseCloseWhenValueIntersectionThenFalse() {
+    Interval firstInterval = new IntervalBuilder().closed(left.getLess()).closed(left.getGreater()).build();
+    Interval secondInterval = new IntervalBuilder().closed(right.getLess()).closed(right.getGreater()).build();
+    assertFalse(firstInterval.intersects(secondInterval));
+  }
+
+  @Test
+  public void givenTwoIntervalsCloseCloseWhenValueIntersectionThenTrue() {
+    Interval firstInterval = new IntervalBuilder().closed(left.getLess()).closed(left.getGreater()).build();
+    Interval secondInterval = new IntervalBuilder().closed(left.getGreater()).closed(right.getGreater()).build();
+    assertTrue(firstInterval.intersectsClosed(secondInterval));
   }
 }

@@ -15,11 +15,18 @@ public class Interval {
 		return this.min.isWithin(value) && this.max.isWithin(value);
 	}
 
-	public boolean intersects(Interval interval){
-		if (Math.max(this.min.value,interval.min.value)<Math.min(this.max.value,interval.max.value))
+	public boolean intersects(Interval interval) {
+		if (Math.max(this.min.value, interval.min.value) < Math.min(this.max.value, interval.max.value))
 			return true;
 		return false;
 	}
+
+	public boolean intersectsClosed(Interval interval) {
+		if (Math.max(this.min.value, interval.min.value) <= Math.min(this.max.value, interval.max.value))
+			return true;
+		return false;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
