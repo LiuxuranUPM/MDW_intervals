@@ -102,4 +102,11 @@ public class IntervalTest {
     secondInterval = new IntervalBuilder().closed(left.getEquals()).closed(right.getEquals()).build();
     assertTrue(firstInterval.intersectsClosed(secondInterval));
   }
+
+  @Test
+  public void givenTwoIntervalsOpenCloseWhenValueIntersectionThenFalse(){
+    Interval firstInterval = new IntervalBuilder().open(left.getLess()).open(left.getGreater()).build();
+    Interval secondInterval = new IntervalBuilder().closed(right.getLess()).closed(right.getGreater()).build();
+    assertFalse(firstInterval.intersects(secondInterval));
+  }
 }
